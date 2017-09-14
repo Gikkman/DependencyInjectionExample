@@ -24,33 +24,43 @@
 package com.gikk.dep.parts.engines.turbo;
 
 import com.github.pyknic.stiletto.Provider;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  *
  * @author Gikkman
  */
 @Provider
-class Mk2Turbo implements Turbo{
+class Mk2RemoteTurbo implements Turbo{
     
     @Override
-    public void accelerate(){
-        System.out.println(
-"~~~ BRAAAAA AAAAA AAAA *pst* WAAAAAAA AAAAAAAA *pst* AAAAAAAAAM  ~~~\n"+
-"\n"+    
-"                       _____________________\n" +
-"    /  .       .      (<$$$$$$>#####<::::::>)\n" +
-"   .      .     .  _/~~~~~~~~~~~~~~~~~~~~~~~~~\\_   .       .   .   \\\n" +
-".(          . .  /~                             ~\\ . .   .\n" +
-"  ( . .        .~                                 ~.      .         )\n" +
-"           ()\\/_____                           _____\\/()   .    .  ).\n" +
-"(         .-''      ~~~~~~~~~~~~~~~~~~~~~~~~~~~     ``-.  ...\n" +
-".  . . .-~              __________________              ~-.  .    /\n" +
-" .   ..`~~/~~~~~~~~~~~~TTTTTTTTTTTTTTTTTTTT~~~~~~~~~~~~\\~~'    . ) .\n" +
-"    . .| | | #### #### || | | | [] | | | || #### #### | | | .\n" +
-"   (   ;__\\|___________|++++++++++++++++++|___________|/__;.   .\n" +
-"     .  (~~====___________________________________====~~~)\n" +
-" ( .  .. \\------_____________[ POLICE ]__________-------/ ..  .     )\n" +
-"         .  |      ||         ~~~~~~~~       ||      |\n" +
-"             \\_____/                          \\_____/");
+    public String accelerate(){
+        
+        try {
+            return getHTML("https://pastebin.com/raw/313RWktb");
+        } catch (Exception ex) {
+            return "";
+        }
     }
+    
+    public static String getHTML(String urlToRead) throws Exception {
+        StringBuilder result = new StringBuilder();
+        URL url = new URL(urlToRead);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        try (InputStream is = conn.getInputStream();
+             InputStreamReader isr = new InputStreamReader(is);
+             BufferedReader rd = new BufferedReader(isr)
+            ) {
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line).append(System.lineSeparator());
+            } 
+        }
+      return result.toString();
+   }
 }

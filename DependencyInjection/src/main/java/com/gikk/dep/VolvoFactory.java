@@ -21,31 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.gikk.dep.parts.engines;
+package com.gikk.dep;
 
-import com.gikk.dep.Engine;
-import com.gikk.dep.parts.engines.turbo.Turbo;
+import com.gikk.dep.cars.Volvo;
+import com.gikk.dep.parts.bodies.NormalBody;
+import com.gikk.dep.parts.engines.SedanEngine;
+import com.gikk.dep.parts.engines.turbo.Mk1Turbo;
 
 /**
  *
  * @author Gikkman
  */
-public class SedanEngine implements Engine{
-
-    private Turbo turbo;
-    
-    public SedanEngine(Turbo turbo){
-        this.turbo = turbo;
-    }
-    
-    @Override
-    public void accelerate() {
-        System.out.println("~ Mrrrrrrrrrrr rrrrrrr ~");
-    }
-
-    @Override
-    public void turbo() {
-        accelerate();
-        System.out.println(this.turbo.accelerate());
+public class VolvoFactory {
+    public static Car createVolvo(){
+        Engine engine = new SedanEngine( new Mk1Turbo());
+        Body body = new NormalBody();
+        return new Volvo(engine, body);
     }
 }

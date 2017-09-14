@@ -21,31 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.gikk.dep.parts.engines;
+package com.gikk.dep;
 
-import com.gikk.dep.Engine;
-import com.gikk.dep.parts.engines.turbo.Turbo;
+import com.gikk.dep.cars.Jaguar;
+import com.github.pyknic.stiletto.Injector;
 
 /**
  *
  * @author Gikkman
  */
-public class SedanEngine implements Engine{
-
-    private Turbo turbo;
+public class JaguarFactory {
     
-    public SedanEngine(Turbo turbo){
-        this.turbo = turbo;
-    }
-    
-    @Override
-    public void accelerate() {
-        System.out.println("~ Mrrrrrrrrrrr rrrrrrr ~");
-    }
-
-    @Override
-    public void turbo() {
-        accelerate();
-        System.out.println(this.turbo.accelerate());
+    public static Car createJaguar(Injector injector){
+        return injector.create(Jaguar.class);
     }
 }

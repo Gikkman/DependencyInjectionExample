@@ -48,7 +48,7 @@ public class SportEngine implements Engine{
     @Override
     public void turbo() {
         accelerate();
-        this.turbo.accelerate();
+        System.out.println(this.turbo.accelerate());
     }
     
 }

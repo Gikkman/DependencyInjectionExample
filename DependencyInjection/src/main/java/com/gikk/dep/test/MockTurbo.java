@@ -21,31 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.gikk.dep.parts.engines;
+package com.gikk.dep.test;
 
-import com.gikk.dep.Engine;
 import com.gikk.dep.parts.engines.turbo.Turbo;
+import com.github.pyknic.stiletto.Provider;
 
 /**
  *
  * @author Gikkman
  */
-public class SedanEngine implements Engine{
-
-    private Turbo turbo;
-    
-    public SedanEngine(Turbo turbo){
-        this.turbo = turbo;
-    }
-    
-    @Override
-    public void accelerate() {
-        System.out.println("~ Mrrrrrrrrrrr rrrrrrr ~");
-    }
+@Provider
+public class MockTurbo implements Turbo{
 
     @Override
-    public void turbo() {
-        accelerate();
-        System.out.println(this.turbo.accelerate());
+    public String accelerate() {
+        return
+            "(The turbo is just a mock)";
     }
 }

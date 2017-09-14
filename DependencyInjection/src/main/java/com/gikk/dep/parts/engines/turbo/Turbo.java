@@ -28,5 +28,5 @@ package com.gikk.dep.parts.engines.turbo;
  * @author Gikkman
  */
 public interface Turbo {
-    void accelerate();
+    String accelerate();
 }

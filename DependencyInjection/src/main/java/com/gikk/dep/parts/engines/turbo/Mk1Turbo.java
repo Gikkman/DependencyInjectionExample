@@ -30,7 +30,8 @@ package com.gikk.dep.parts.engines.turbo;
 public class Mk1Turbo implements Turbo{
 
     @Override
-    public void accelerate() {
-        System.out.println("~ Mrrrrrrrrrrr RRAAAAAAA RAAAAA raaaaaa rrrrrrr ~");
+    public String accelerate() {
+        return"\tEngage MK1 turbo: \n" +
+            "~ Mrrrrrrrrrrr RRAAAAAAA RAAAAA raaaaaa rrrrrrr ~";
     }
 }

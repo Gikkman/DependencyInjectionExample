@@ -23,7 +23,9 @@
  */
 package com.gikk.dep.test;
 
+import com.gikk.dep.Engine;
 import com.gikk.dep.parts.engines.turbo.Turbo;
+import com.github.pyknic.stiletto.Inject;
 import com.github.pyknic.stiletto.Provider;
 
 /**
@@ -31,13 +33,19 @@ import com.github.pyknic.stiletto.Provider;
  * @author Gikkman
  */
 @Provider
-public class TurboTest implements Turbo{
+public class MockEngine implements Engine{
 
+    @Inject
+    Turbo turbo;
+    
     @Override
     public void accelerate() {
-        System.out.println(
-            "~~~ BRAAAAA AAAAA AAAA *pst* WAAAAAAA AAAAAAAA *pst* AAAAAAAAAM  ~~~\n"+
-            "\n"+
-            "(But it is safe, we are on a test track)");
+        System.out.println("(The engine is just a mock)");
     }
+
+    @Override
+    public void turbo() {
+        System.out.println(this.turbo.accelerate());
+    }
+    
 }

@@ -23,13 +23,7 @@
  */
 package com.gikk.dep;
 
-import com.gikk.dep.cars.Fiat;
-import com.gikk.dep.cars.Jaguar;
-import com.gikk.dep.cars.Volvo;
-import com.gikk.dep.parts.bodies.NormalBody;
-import com.gikk.dep.parts.engines.SedanEngine;
 import com.gikk.dep.parts.engines.SportEngine;
-import com.gikk.dep.parts.engines.turbo.Mk1Turbo;
 import com.github.pyknic.stiletto.Injector;
 import java.io.IOException;
 
@@ -38,29 +32,26 @@ import java.io.IOException;
  * @author Gikkman
  */
 public class Main {
+    
     public static void main(String ... args){
-        Car fiat = new Fiat();
+        Car fiat = FiatFactory.createFiat();
         testDrive(fiat);
         
-        Engine engine = new SedanEngine( new Mk1Turbo());
-        Body body = new NormalBody();
-        Car volvo = new Volvo(engine, body);
+        Car volvo = VolvoFactory.createVolvo();
         testDrive(volvo);
         
-        Injector factory = Injector.builder()
-                                   .fromProviders("com.gikk.dep.parts")
-                                   .build();
-        Car jaguar = factory.create(Jaguar.class);
+        Car jaguar = JaguarFactory.createJaguar(injector);
         testDrive(jaguar);
         
-        System.out.println("----------------------------------------");
-        System.out.println("------- TESTER SHOWCASE -----------");
-        System.out.println("----------------------------------------");
-        engineShowcase();       
+        Car mockJaguar = JaguarFactory.createJaguar(mockInjector);
+        testDrive(mockJaguar);
+        
+        engineShowcase();
     }
+    
 
     private static void testDrive(Car car) {
-        System.out.println("-----");
+        System.out.println("---------------------------------------------------");
         
         System.out.println("Checking for show-off potential:");
         car.showoff();
@@ -72,11 +63,13 @@ public class Main {
         
         System.out.println("Testing out an aggresive overtake!");
         car.overtake();
-        System.out.println("-----\n");
+        System.out.println("---------------------------------------------------\n");
         
         awaitKeystroke();
     }
 
+    
+    
     private static void awaitKeystroke() {
         try {
             System.in.read();
@@ -84,27 +77,31 @@ public class Main {
             //Ignore
         }
     }
+    
+    private static Injector injector = Injector.builder()
+                               .fromProviders("com.gikk.dep.parts")
+                               .build();
+    private static Injector mockInjector = Injector.builder()
+                               .fromProviders("com.gikk.dep.test")
+                               .build();
 
     private static void engineShowcase() {
-        Injector normalInjector = Injector.builder()
-                                            .fromProviders("com.gikk.dep.parts")
-                                            .build();
-        Engine normalSport = normalInjector.create(SportEngine.class);
-        System.out.println("Normal accelerate:");
-        normalSport.accelerate();
-        System.out.println("Normal turbo:");
-        normalSport.turbo();
+        System.out.println("************************************************");
+        System.out.println("************************************************");
+        
+        Engine sport = injector.create(SportEngine.class);
+        System.out.println("And the turbo:");
+        sport.accelerate();
+        sport.turbo();
         
         awaitKeystroke();
-        System.out.println("*************************");
+        System.out.println("************************************************");
+        Engine test = mockInjector.create(SportEngine.class);
+        test.accelerate();
+        System.out.println("And the turbo:");
+        test.turbo();
         
-        Injector testInjector = Injector.builder()
-                                            .fromProviders("com.gikk.dep.test")
-                                            .build();
-        Engine testSport = testInjector.create(SportEngine.class);
-        System.out.println("Test accelerate:");
-        testSport.accelerate();
-        System.out.println("Test turbo:");
-        testSport.turbo();
+        System.out.println("************************************************");
+        System.out.println("************************************************");
     }
 }
