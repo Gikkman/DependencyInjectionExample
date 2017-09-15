@@ -29,4 +29,5 @@ package com.gikk.dep.parts.engines.turbo;
  */
 public interface Turbo {
     String accelerate();
+    boolean isOnline();
 }

@@ -34,4 +34,9 @@ public class Mk1Turbo implements Turbo{
         return"\tEngage MK1 turbo: \n" +
             "~ Mrrrrrrrrrrr RRAAAAAAA RAAAAA raaaaaa rrrrrrr ~";
     }
+
+    @Override
+    public boolean isOnline() {
+       return true;
+    }
 }

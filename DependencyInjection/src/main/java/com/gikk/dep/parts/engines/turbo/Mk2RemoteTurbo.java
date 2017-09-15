@@ -37,15 +37,25 @@ import java.net.URL;
 @Provider
 class Mk2RemoteTurbo implements Turbo{
     
-    @Override
-    public String accelerate(){
-        
+    private String desc;
+    
+    public Mk2RemoteTurbo(){
         try {
-            return getHTML("https://pastebin.com/raw/313RWktb");
+            this.desc = getHTML("https://pastebin.com/raw/313RWktb");
         } catch (Exception ex) {
-            return "";
+            this.desc = null;
         }
     }
+    
+    @Override
+    public String accelerate(){
+        return desc;
+    }
+
+    @Override
+    public boolean isOnline() {
+        return desc != null && !desc.isEmpty();
+    }   
     
     public static String getHTML(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();

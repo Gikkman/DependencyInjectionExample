@@ -46,6 +46,6 @@ public class SedanEngine implements Engine{
     @Override
     public void turbo() {
         accelerate();
-        System.out.println(this.turbo.accelerate());
+        if(turbo.isOnline()) System.out.println(this.turbo.accelerate());
     }
 }

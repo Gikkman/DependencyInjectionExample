@@ -36,6 +36,11 @@ public class MockTurbo implements Turbo{
     @Override
     public String accelerate() {
         return
-            "(The turbo is just a mock)";
+            "(The turbo is just a mock, but it appears as online ¯\\_(ツ)_/¯ )";
+    }
+
+    @Override
+    public boolean isOnline() {
+        return true;
     }
 }

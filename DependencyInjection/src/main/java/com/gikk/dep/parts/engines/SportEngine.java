@@ -48,7 +48,10 @@ public class SportEngine implements Engine{
     @Override
     public void turbo() {
         accelerate();
-        System.out.println(this.turbo.accelerate());
+        if(turbo.isOnline())
+            System.out.println(this.turbo.accelerate());
+        else
+            System.out.println("(The turbo is currently offline)");
     }
     
 }
